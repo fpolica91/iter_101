@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  username    String    @unique
+  firstName   String
+  lastName    String
+  ssn         String    @unique
+  password    String
+  phoneNumber String
+  Account     Account[]
+  updatedAt   DateTime  @default(now()) @updatedAt
+  createdAt   DateTime  @default(now())
+}
+
+model Account {
+  accountType AccountType @default(CURRENT)
+  id          String      @id @unique @default(cuid())
+  balance     Float
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  Credits     Credits[]
+  Debits      Debits[]
+  ledger      Ledger?
+}
+
+model Credits {
+  id        String   @id @default(cuid())
+  amount    Float
+  accountId String
+  Account   Account  @relation(fields: [accountId], references: [id])
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  Ledger    Ledger?  @relation(fields: [ledgerId], references: [id])
+  ledgerId  String?
+}
+
+model Debits {
+  id        String   @id @default(cuid())
+  amount    Float
+  accountId String
+  Account   Account  @relation(fields: [accountId], references: [id])
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  ledgerId  String?
+  Ledger    Ledger?  @relation(fields: [ledgerId], references: [id])
+}
+
+model Ledger {
+  id        String    @id @unique @default(cuid())
+  account   Account   @relation(fields: [accountId], references: [id])
+  accountId String    @unique
+  Debits    Debits[]
+  Credits   Credits[]
+}
+
+enum Status {
+  PENDING
+  COMPLETED
+  REJECTED
+}
+
+enum AccountType {
+  SAVINGS
+  CURRENT
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
