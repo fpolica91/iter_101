@@ -2,16 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-directive @key(fields: String!) on OBJECT | INTERFACE
-
-directive @extends on OBJECT | INTERFACE
-
-directive @external on OBJECT | FIELD_DEFINITION
-
-directive @requires(fields: String!) on FIELD_DEFINITION
-
-directive @provides(fields: String!) on FIELD_DEFINITION
-
 type User {
   id: ID!
   name: String!
@@ -23,6 +13,20 @@ type User {
   phoneNumber: String!
 }
 
+type Query {
+  hello: String!
+}
+
 type Mutation {
-  createUser: User!
+  createUser(userData: CreateUser!): User!
+}
+
+input CreateUser {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  username: String!
+  ssn: String!
+  phoneNumber: String!
 }
