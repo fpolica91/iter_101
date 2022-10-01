@@ -14,6 +14,11 @@ interface UserDto {
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
+
+  me(id: string) {
+    return this.prisma.user.findUnique({ where: { id } });
+  }
+
   async createUser(data: UserDto) {
     const user = await this.prisma.user.create({
       data,

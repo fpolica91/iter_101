@@ -1,5 +1,12 @@
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import {
+  Directive,
+  Field,
+  ID,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql';
 import { Account as Model } from '@prisma/client';
+import { User } from './user';
 
 enum AccountType {
   SAVINGS = 'SAVINGS',
@@ -11,6 +18,7 @@ registerEnumType(AccountType, {
   description: 'Available purchase statuses',
 });
 
+// @Directive('@key(fields: "userId")')
 @ObjectType('Account')
 export class Account implements Partial<Model> {
   @Field(() => ID)
@@ -24,4 +32,7 @@ export class Account implements Partial<Model> {
 
   @Field()
   public userId: string;
+
+  // @Field()
+  // user: User;
 }

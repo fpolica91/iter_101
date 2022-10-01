@@ -2,21 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { AccountType } from '@prisma/client';
 import { PrismaService } from '../database/prisma/prisma.service';
 
-interface AccountDto {
-  balance: number;
+interface DebitDto {
+  amount: number;
   userId: string;
   accountType: AccountType;
 }
 
 @Injectable()
-export class AccountService {
+export class DebitService {
   constructor(private prisma: PrismaService) {}
-
-  findAccountsByUserId(userId: string) {
-    return this.prisma.account.findMany({ where: { userId } });
+  findByUserId(userId: string) {
+    return this.prisma.user.findUnique({ where: { id: userId } });
   }
-
-  createAccount(data: AccountDto) {
-    return this.prisma.account.create({ data });
-  }
+  // createDebit(data: AccountDto) {}
 }
