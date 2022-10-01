@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Account } from '@prisma/client';
+import { Account, AccountType } from '@prisma/client';
 
 @InputType()
 export class CreateAccount implements Partial<Account> {
@@ -7,4 +7,6 @@ export class CreateAccount implements Partial<Account> {
   balance: number;
   @Field()
   userId: string;
+  @Field()
+  accountType: AccountType;
 }
