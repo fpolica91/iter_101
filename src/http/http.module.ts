@@ -12,6 +12,8 @@ import { DatabaseModule } from '../database/database.module';
 import { UsersService } from '../services/users.service';
 import { HttpResolver } from './http.resolver';
 import { HttpService } from './http.service';
+import { ACcountService } from '../services/account.service';
+import { AccountResolver } from './graphql/resolvers/account.resolver';
 
 @Module({
   imports: [
@@ -21,6 +23,13 @@ import { HttpService } from './http.service';
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
     }),
   ],
-  providers: [UsersService, UsersResolver, HttpResolver, HttpService],
+  providers: [
+    UsersService,
+    UsersResolver,
+    HttpResolver,
+    HttpService,
+    ACcountService,
+    AccountResolver,
+  ],
 })
 export class HttpModule {}

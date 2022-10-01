@@ -5,8 +5,6 @@ export class User {
   @Field(() => ID)
   public id: string;
   @Field()
-  public name: string;
-  @Field()
   public email: string;
   @Field()
   public username: string;

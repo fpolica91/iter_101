@@ -4,23 +4,23 @@ import { User } from '@prisma/client';
 @InputType()
 export class CreateUser implements Partial<User> {
   @Field()
-  firstName?: string;
+  firstName: string;
 
   @Field()
-  lastName?: string;
+  lastName: string;
 
   @Field()
-  email?: string;
+  email: string;
 
   @Field()
-  password?: string;
+  password: string;
 
   @Field()
-  username?: string;
+  username: string;
 
   @Field()
-  ssn?: string;
+  ssn: string;
 
   @Field()
-  phoneNumber?: string;
+  phoneNumber: string;
 }

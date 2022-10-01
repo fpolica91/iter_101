@@ -4,7 +4,6 @@
 
 type User {
   id: ID!
-  name: String!
   email: String!
   username: String!
   firstName: String!
@@ -13,12 +12,19 @@ type User {
   phoneNumber: String!
 }
 
+type Account {
+  id: ID!
+  balance: Float!
+  userId: String!
+}
+
 type Query {
   hello: String!
 }
 
 type Mutation {
   createUser(userData: CreateUser!): User!
+  createAccount(accountData: CreateAccount!): Account!
 }
 
 input CreateUser {
@@ -29,4 +35,9 @@ input CreateUser {
   username: String!
   ssn: String!
   phoneNumber: String!
+}
+
+input CreateAccount {
+  balance: Float!
+  userId: String!
 }

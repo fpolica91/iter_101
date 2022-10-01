@@ -1,0 +1,20 @@
+mutation {
+  createUser(
+    userData: {
+      firstName: "fabricio"
+      lastName: "policarpo"
+      email: "fabricio@fabicio.com"
+      username: "fpolica91"
+      password: "hdhdhhdhdd"
+      ssn: "689146185"
+      phoneNumber: "5612733977"
+    }
+  ) {
+    __typename
+    firstName
+    lastName
+    email
+    ssn
+    phoneNumber
+  }
+}
