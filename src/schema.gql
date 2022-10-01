@@ -27,6 +27,7 @@ enum PurchaseStatus {
 
 type Query {
   hello: String!
+  findAccounts(userId: String!): [Account!]!
 }
 
 type Mutation {

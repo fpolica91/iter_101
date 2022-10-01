@@ -11,6 +11,9 @@ interface AccountDto {
 @Injectable()
 export class ACcountService {
   constructor(private prisma: PrismaService) {}
+  findByUserId(userId: string) {
+    return this.prisma.account.findMany({ where: { userId } });
+  }
   createAccount(data: AccountDto) {
     return this.prisma.account.create({ data });
   }

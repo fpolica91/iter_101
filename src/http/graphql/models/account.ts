@@ -17,7 +17,7 @@ export class Account implements Partial<Model> {
   public id: string;
 
   @Field(() => AccountType)
-  accountType?: AccountType;
+  accountType: AccountType;
 
   @Field()
   public balance: number;
